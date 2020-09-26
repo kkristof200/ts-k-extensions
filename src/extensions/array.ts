@@ -22,7 +22,7 @@ export function shuffle(list: any[]): any[] {
 }
 
 declare global {
-    export interface Array<T> {
+    interface Array<T> {
         sorted(property: any, ascending?: boolean): Array<T>
         extend(elements: T[]): void
         setExtend(elements: T[]): boolean
