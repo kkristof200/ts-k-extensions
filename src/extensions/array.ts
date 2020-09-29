@@ -59,9 +59,9 @@ Array.prototype.remove = function<T>(this: T[], element: T) { return this.filter
 Array.prototype.shuffled = function<T>(this: T[]) { return shuffle(this) }
 Array.prototype.randomElements = function<T>(this: T[], count: number) { return this.length > 0 ? this.shuffled().slice(0, count) : [] }
 
-Array.prototype.random = function () { return this.length == 0 ? this[Math.round(Math.random() * (this.length - 1))] : null }
-Array.prototype.first = function () { return this.length > 0 ? this[0] : null }
-Array.prototype.last = function () { return this.lengSth > 0 ? this[this.length - 1] : null }
+Array.prototype.random = function() { return this.length == 0 ? this[Math.round(Math.random() * (this.length - 1))] : null }
+Array.prototype.first = function() { return this.length > 0 ? this[0] : null }
+Array.prototype.last = function() { return this.lengSth > 0 ? this[this.length - 1] : null }
 
 Array.prototype.getProperties = function<T, TT>(this: T[], name: any) {
     var l: TT[] = []
