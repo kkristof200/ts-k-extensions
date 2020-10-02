@@ -30,9 +30,9 @@ declare global {
         remove(element: T): T[]
         shuffled(): T[]
         randomElements(count: number): T[]
-        random?: T
-        first?: T
-        last?: T
+        random(): T
+        first(): T
+        last(): T
         getProperties<TT>(this: T[], name: any): TT[]
     }
 }

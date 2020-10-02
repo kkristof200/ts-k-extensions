@@ -51,4 +51,4 @@ String.prototype.trimLeft = function(chars?: string) {
     return newStr
 }
 String.prototype.trim = function(chars?: string) { return this.trimLeft(chars).trimRight(chars) }
-String.prototype.lastPathComponent = function(): string { return this.trimRight('/').split('/').last }
+String.prototype.lastPathComponent = function(): string { return this.trimRight('/').split('/').last() }
