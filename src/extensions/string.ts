@@ -12,6 +12,9 @@ declare global {
         trimRight(chars?: string | string[]): string
         trimLeft(chars?: string | string[]): string
         trim(chars?: string | string[]): string
+        stripight(chars?: string | string[]): string
+        stripLeft(chars?: string | string[]): string
+        strip(chars?: string | string[]): string
         lastPathComponent(): string
     }
 }
@@ -73,4 +76,9 @@ String.prototype.trimLeft = function(chars?: string | string[]) {
     return newStr
 }
 String.prototype.trim = function(chars?: string | string[]) { return this.trimLeft(chars).trimRight(chars) }
+
+String.prototype.stripLeft = function(chars?: string | string[]) { return this.trimLeft(chars) }
+String.prototype.stripight = function(chars?: string | string[]) { return this.trimRight(chars) }
+String.prototype.strip = function(chars?: string | string[]) { return this.trim(chars) }
+
 String.prototype.lastPathComponent = function(): string { return this.trimRight('/').split('/').last() }
