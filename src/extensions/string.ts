@@ -9,9 +9,9 @@ declare global {
         filled(length: number, fillChar?: string, side?: FillSide): string
         remove(toRemove: string): string
         replaceAll(toReplace: string, toReplaceWith?: string): string
-        trimRight(charlist?: string): string
-        trimLeft(charlist?: string): string
-        trim(charlist?: string): string
+        trimRight(chars?: string | string[]): string
+        trimLeft(chars?: string | string[]): string
+        trim(chars?: string | string[]): string
         lastPathComponent(): string
     }
 }
@@ -28,27 +28,49 @@ String.prototype.remove = function(toRemove: string) { return this.replaceAll(to
 String.prototype.replaceAll = function(toReplace: string, toReplaceWith?: string) {
     return this.split(toReplace).join(toReplaceWith ?? '')
 }
-String.prototype.trimRight = function(chars?: string) {
-    if (!chars || chars.length == 0) chars = ' '
+String.prototype.trimRight = function(chars?: string | string[]) {
+    if (!chars || chars.length == 0) { chars = [' ', '\n'] }
+    else if (!Array.isArray(chars)) { chars = [chars] }
 
     var newStr = `${this}`
 
-    while (newStr.endsWith(chars)) {
-        newStr = newStr.substr(0, newStr.length - chars.length)
+    while (true) {
+        var didEndWith = false
+
+        for (const char of chars) {
+            if (newStr.endsWith(char)) {
+                newStr = newStr.substr(0, newStr.length - char.length)
+
+                didEndWith = true
+            }
+        }
+
+        if (!didEndWith) break
     }
 
     return newStr
 }
-String.prototype.trimLeft = function(chars?: string) {
-    if (!chars || chars.length == 0) chars = ' '
+String.prototype.trimLeft = function(chars?: string | string[]) {
+    if (!chars || chars.length == 0) { chars = [' ', '\n'] }
+    else if (!Array.isArray(chars)) { chars = [chars] }
 
     var newStr = `${this}`
 
-    while (newStr.startsWith(chars)) {
-        newStr = newStr.substr(chars.length - 1, newStr.length - chars.length)
+    while (true) {
+        var didEndWith = false
+
+        for (const char of chars) {
+            if (newStr.startsWith(char)) {
+                newStr = newStr.substr(chars.length - 1, newStr.length - chars.length)
+
+                didEndWith = true
+            }
+        }
+
+        if (!didEndWith) break
     }
     
     return newStr
 }
-String.prototype.trim = function(chars?: string) { return this.trimLeft(chars).trimRight(chars) }
+String.prototype.trim = function(chars?: string | string[]) { return this.trimLeft(chars).trimRight(chars) }
 String.prototype.lastPathComponent = function(): string { return this.trimRight('/').split('/').last() }
