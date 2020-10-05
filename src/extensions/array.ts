@@ -33,6 +33,9 @@ declare global {
         random(): T
         first(): T
         last(): T
+        firstN(count: number): T[]
+        lastN(count: number): T[]
+        reversed(): T[]
         getProperties<TT>(this: T[], name: any): TT[]
     }
 }
@@ -62,6 +65,11 @@ Array.prototype.randomElements = function<T>(this: T[], count: number) { return 
 Array.prototype.random = function() { return this.length == 0 ? this[Math.round(Math.random() * (this.length - 1))] : null }
 Array.prototype.first = function() { return this.length > 0 ? this[0] : null }
 Array.prototype.last = function() { return this.length > 0 ? this[this.length - 1] : null }
+
+Array.prototype.firstN = function(count: number) { return this.length == 0 ? [] : this.slice(0,count ) }
+Array.prototype.lastN = function(count: number) { return this.length == 0 ? [] : this.reversed().firstN(count).reversed() }
+
+Array.prototype.reversed = function() { return [...this].reverse() }
 
 Array.prototype.getProperties = function<T, TT>(this: T[], name: any) {
     var l: TT[] = []
